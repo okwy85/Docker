@@ -1,0 +1,29 @@
+ ===============AMZ EC2 INSTANCE =========================
+ create an ec2 instance and connect to it
+ yum install docker (TO INSTALL DOCKER)
+ docker --version
+ service docker status 
+ service docker start (TO START DOCKER DAEMON)
+ service docker status
+ docker images (TO LIST ALL DOCKER IMAGES)
+ systemctl enable docker (ALLOWS DOCKER TO START WHEN WE POWER UP OUR MACKINES)
+ docker pull nginx:latest ( nginx is a docker image. You need to specify a tag or it will default to latest)
+docker image (to view the images pulled)
+docker run --name some-nginx -d -p 8080:80 some-content-nginx (to start your container and assign an external port)
+# -d allows the process to run in the background without holding up the command line.
+docker ps -a  (shows all the running process)
+docker rm -f d7a74c7dddf5 (to remove a container ID, 'd7a74c7dddf5')
+docker pull tomcat:8.5.63-jdk15 (to pull tomcat image)
+
+#tomcat wont run on the url as the webbapps is empty. we need to copy the content from webbapps.dist
+docker exec -it fdb5ba342eb5 /bin/bash -----> to access tomcat folder
+ls -l
+cd webapps.dist
+cp -r . /usr/local/tomcat/webapps (to copy all the content of webapps.dist into webapps)
+docker pull jenkins/jenkins:lts
+docker run --name jenkins -d -p 8082:8080 jenkins/jenkins:lts
+#to get your passwprd from /var/jenkins_home/secrets/initialAdminPassword
+docker exec -it a9e3c6757cfd /bin/bash (to access the jenkins folder)
+cat /var/jenkins_home/secrets/initialAdminPassword (displays the password)
+
+*****point to note: name of the container and port must be unique.****
