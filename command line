@@ -27,3 +27,53 @@ docker exec -it a9e3c6757cfd /bin/bash (to access the jenkins folder)
 cat /var/jenkins_home/secrets/initialAdminPassword (displays the password)
 
 *****point to note: name of the container and port must be unique.****
+
+docker rmi ---to remove an image
+
+
+*****to create an image when there is no image that can be pulled from docker hub******
+nano dockerfile
+==========================================================*
+(content: edit dockerfile and save)
+FROM ubuntu
+Maintainer "Okwy"
+RUN apt-get update
+RUN apt install vim -y
+CMD /bin/echo "hello from Docker"
+==========================================================*
+
+====================================================**
+(content: edit dockerfile and save)
+FROM nginx:latest
+
+RUN apt -y update
+RUN apt install -y git
+RUN apt install -y apache2
+
+COPY ./index.html /usr/share/nginx/html/index.html
+
+CMD ["nginx", "-g", "daemon off;"]
+===============================================================**
+
+
+docker build -t okwy85/ubuntu-day:v1 .
+
+****to push image to docker hub *****
+docker login ---log in with your dockerHub credential
+docker images
+docker push okwy85/ubuntu-day:v1
+
+***to pull the image from your dockerhub repository****
+docker pull okwy85/ubuntu-day:v1
+docker run --name my-container -d okwy85/ubuntu-day:v1
+
+=====to start/stop a container =======
+docker start container_id
+docker stop container_id
+
+===== to fetch docker log =======
+docker log -f
+
+=====to get details of container =====
+docker inspect
+
